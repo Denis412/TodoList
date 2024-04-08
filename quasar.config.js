@@ -9,6 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
 const { configure } = require('quasar/wrappers');
+const { mergeConfig } = require('vite');
 const path = require('path');
 
 module.exports = configure(function (/* ctx */) {
@@ -83,7 +84,13 @@ module.exports = configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf(viteConf) {
+        viteConf.build = mergeConfig(viteConf.build, {
+          chunkSizeWarningLimit: 750,
+        });
+
+        viteConf.envDir = './src/app';
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [
