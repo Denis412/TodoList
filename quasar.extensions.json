@@ -3,5 +3,8 @@
     "options": [
       "ui"
     ]
+  },
+  "@quasar/apollo": {
+    "subscriptions": false
   }
 }

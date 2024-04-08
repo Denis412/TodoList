@@ -14,6 +14,8 @@ const path = require('path');
 
 module.exports = configure(function (/* ctx */) {
   return {
+    supportTS: true,
+
     eslint: {
       // fix: true,
       // include: [],
@@ -31,7 +33,6 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
       'i18n',
-      'axios',
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -69,7 +70,9 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: require('dotenv').config({
+        path: `.env${process.env.NODE_ENV}`
+      }).parsed,
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
