@@ -28,7 +28,7 @@ type QueryErrorCallback = (
   context: OnMutationErrorContext | OnQueryErrorContext
 ) => void;
 
-export function sendMutation(
+export function sendMutation<TResult>(
   params: SendQueryParams,
   options?: MaybeRef<UseMutationOptions> | ReactiveFunction<UseMutationOptions>
 ) {
@@ -40,7 +40,7 @@ export function sendMutation(
     queryBody: body,
   } as GetQuerySchemaParams);
 
-  const mutationResult = useMutation(schema, options);
+  const mutationResult = useMutation<TResult>(schema, options);
 
   let errorCallback: QueryErrorCallback | null = null;
 
@@ -62,7 +62,7 @@ export function sendMutation(
   };
 }
 
-export function sendQuery(
+export function sendQuery<TResult>(
   params: SendQueryParams,
   variables?: VariablesParameter<any>,
   options?: MaybeRef<UseQueryOptions> | ReactiveFunction<UseQueryOptions>
@@ -77,8 +77,8 @@ export function sendQuery(
 
   let queryResult = null;
 
-  if (options) queryResult = useQuery(schema, variables, options);
-  else queryResult = useQuery(schema, variables);
+  if (options) queryResult = useQuery<TResult>(schema, variables, options);
+  else queryResult = useQuery<TResult>(schema, variables);
 
   let errorCallback: QueryErrorCallback | null = null;
 
