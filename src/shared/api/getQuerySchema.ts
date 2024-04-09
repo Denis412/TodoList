@@ -26,6 +26,7 @@ function GetCreateSchema(params: GetCreateSchemaParams) {
   const queryString = `mutation create${capitalizeEntityName}($input: Create${capitalizeEntityName}Input!) {
     Create${capitalizeEntityName}(input: $input) {
       record ${queryBody}
+      recordId
     }
   }`;
 
@@ -42,6 +43,7 @@ function GetUpdateSchema(params: GetCreateSchemaParams) {
   const queryString = `mutation update${capitalizeEntityName}($input: Update${capitalizeEntityName}Input!) {
     Update${capitalizeEntityName}(id: $id, input: $input) {
       record ${queryBody}
+      recordId
     }
   }`;
 
@@ -94,9 +96,7 @@ function GetOneObjectSchema(params: GetCreateSchemaParams) {
   const capitalizeEntityName = capitalize(entityName);
 
   const queryString = `query get${capitalizeEntityName}($id: String!) {
-    Get${capitalizeEntityName}(id: $id) {
-      ${queryBody}
-    }
+    Get${capitalizeEntityName}(id: $id) ${queryBody}
   }`;
 
   return gql`

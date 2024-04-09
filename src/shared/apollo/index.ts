@@ -1,6 +1,6 @@
-import { ApolloClientOptions, ApolloLink } from '@apollo/client/core';
+import { ApolloClientOptions } from '@apollo/client/core';
 import { createHttpLink, InMemoryCache } from '@apollo/client/core';
-import { createUploadLink } from 'apollo-upload-client';
+// import { createUploadLink } from 'apollo-upload-client';
 import type { BootFileParams } from '@quasar/app-vite';
 
 export /* async */ function getClientOptions(
@@ -14,21 +14,17 @@ export /* async */ function getClientOptions(
       '/graphql',
   });
 
-  const uploadLink = createUploadLink({
-    uri:
-      import.meta.env.VITE_GRAPHQL_URI ||
-      // Change to your graphql endpoint.
-      '/graphql',
-  });
+  // const uploadLink = createUploadLink({
+  //   uri:
+  //     import.meta.env.VITE_GRAPHQL_URI ||
+  //     // Change to your graphql endpoint.
+  //     '/graphql',
+  // });
 
   return <ApolloClientOptions<unknown>>Object.assign(
     // General options.
     <ApolloClientOptions<unknown>>{
-      link: ApolloLink.split(
-        (op) => op.getContext().hasUpload,
-        uploadLink,
-        httpLink
-      ),
+      link: httpLink,
 
       cache: new InMemoryCache(),
     },

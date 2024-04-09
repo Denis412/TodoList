@@ -1,5 +1,6 @@
 /* API */
 
+export { default as apolloClient } from './apollo/apollo-client';
 export { sendMutation } from './api/queryFunctions';
 export { sendQuery } from './api/queryFunctions';
 

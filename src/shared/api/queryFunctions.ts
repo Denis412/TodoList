@@ -1,5 +1,9 @@
 import GetQuerySchema from '@shared/api/getQuerySchema';
-import { useMutation, useQuery } from '@vue/apollo-composable';
+import {
+  provideApolloClient,
+  useMutation,
+  useQuery,
+} from '@vue/apollo-composable';
 
 import type { MaybeRef } from 'vue';
 import type {
@@ -16,6 +20,9 @@ import type {
 import { ApolloError } from '@apollo/client';
 import { OnErrorContext as OnMutationErrorContext } from '@vue/apollo-composable/dist/useMutation';
 import { OnErrorContext as OnQueryErrorContext } from '@vue/apollo-composable/dist/useQuery';
+import apolloClient from '../apollo/apollo-client';
+
+provideApolloClient(apolloClient);
 
 interface SendQueryParams {
   action: QueryActions;
