@@ -70,6 +70,7 @@ module.exports = configure(function (/* ctx */) {
         ['@pages']: path.join(__dirname, './src/pages'),
         ['@widgets']: path.join(__dirname, './src/widgets'),
         ['@features']: path.join(__dirname, './src/features'),
+        ['@entities']: path.join(__dirname, './src/entities'),
         ['@shared']: path.join(__dirname, './src/shared'),
       },
 

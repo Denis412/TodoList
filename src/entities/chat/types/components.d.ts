@@ -1,0 +1,3 @@
+interface ChatCardProps {
+  chat: Chat;
+}
