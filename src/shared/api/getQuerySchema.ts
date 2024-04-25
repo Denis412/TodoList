@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { capitalize } from '@shared/index';
-import { computed, isRef, MaybeRef, watch } from 'vue';
+import { computed, isRef, MaybeRef } from 'vue';
 
 export enum QueryActions {
   CREATE,

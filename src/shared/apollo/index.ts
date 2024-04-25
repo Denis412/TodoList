@@ -1,12 +1,11 @@
 import { ApolloClientOptions, ApolloLink } from '@apollo/client/core';
 import { createHttpLink, InMemoryCache } from '@apollo/client/core';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
-import type { BootFileParams } from '@quasar/app-vite';
+// import type { BootFileParams } from '@quasar/app-vite';
 
-export /* async */ function getClientOptions(
+export /* async */ function getClientOptions /* options?: Partial<BootFileParams<any>> */() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  /* {app, router, ...} */ options?: Partial<BootFileParams<any>>
-) {
+  /* {app, router, ...} */
   const httpLink = createHttpLink({
     uri:
       import.meta.env.VITE_GRAPHQL_URI ||

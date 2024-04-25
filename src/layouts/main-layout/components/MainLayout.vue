@@ -27,7 +27,7 @@ function toggleLeftDrawer() {
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered> </q-drawer>
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered />
 
     <q-page-container>
       <router-view />

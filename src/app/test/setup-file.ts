@@ -2,6 +2,10 @@
 
 import { beforeAll, afterAll } from 'vitest';
 
-beforeAll(() => {});
+beforeAll(() => {
+  console.log('before');
+});
 
-afterAll(() => {});
+afterAll(() => {
+  console.log('after');
+});

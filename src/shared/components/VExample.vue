@@ -16,7 +16,7 @@ function testQuery() {
   });
 
   sendQueryResult.onError((param, context) => {
-    console.log('error in VExample.vue');
+    console.log('error in VExample.vue', param, context);
   });
 
   return sendQueryResult.query;

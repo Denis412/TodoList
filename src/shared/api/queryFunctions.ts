@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import GetQuerySchema from '@shared/api/getQuerySchema';
 import {
   provideApolloClient,
