@@ -1,5 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import GetQuerySchema from '@shared/api/getQuerySchema';
-import { useMutation, useQuery } from '@vue/apollo-composable';
+import {
+  provideApolloClient,
+  useMutation,
+  useQuery,
+} from '@vue/apollo-composable';
 
 import type { MaybeRef } from 'vue';
 import type {
@@ -16,6 +22,9 @@ import type {
 import { ApolloError } from '@apollo/client';
 import { OnErrorContext as OnMutationErrorContext } from '@vue/apollo-composable/dist/useMutation';
 import { OnErrorContext as OnQueryErrorContext } from '@vue/apollo-composable/dist/useQuery';
+import apolloClient from '../apollo/apollo-client';
+
+provideApolloClient(apolloClient);
 
 interface SendQueryParams {
   action: QueryActions;
@@ -28,7 +37,7 @@ type QueryErrorCallback = (
   context: OnMutationErrorContext | OnQueryErrorContext
 ) => void;
 
-export function sendMutation(
+export function sendMutation<TResult>(
   params: SendQueryParams,
   options?: MaybeRef<UseMutationOptions> | ReactiveFunction<UseMutationOptions>
 ) {
@@ -40,7 +49,7 @@ export function sendMutation(
     queryBody: body,
   } as GetQuerySchemaParams);
 
-  const mutationResult = useMutation(schema, options);
+  const mutationResult = useMutation<TResult>(schema, options);
 
   let errorCallback: QueryErrorCallback | null = null;
 
@@ -62,7 +71,7 @@ export function sendMutation(
   };
 }
 
-export function sendQuery(
+export function sendQuery<TResult>(
   params: SendQueryParams,
   variables?: VariablesParameter<any>,
   options?: MaybeRef<UseQueryOptions> | ReactiveFunction<UseQueryOptions>
@@ -77,8 +86,8 @@ export function sendQuery(
 
   let queryResult = null;
 
-  if (options) queryResult = useQuery(schema, variables, options);
-  else queryResult = useQuery(schema, variables);
+  if (options) queryResult = useQuery<TResult>(schema, variables, options);
+  else queryResult = useQuery<TResult>(schema, variables);
 
   let errorCallback: QueryErrorCallback | null = null;
 
